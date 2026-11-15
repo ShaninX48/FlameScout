@@ -16,6 +16,7 @@ Data sources
 Investigation catalog: summaries of NASA PSI records and NASA technical reports (src/data/experiments.ts). Representative values are flagged (≈).
 Run-level data: FLEX Table IX, NASA/TP-2015-216046 (NTRS 20150023456), 276 tests (157 methanol, 119 heptane), in src/data/flexTests.ts. Pressure 70 to 309 kPa, O2 12 to 34 mol%.
 SAME (PSI-101) TEM soot particle sizes (datasets/): image-derived approximations from automated blob detection, not lab measurements.
+Other datasets in datasets/: FLEX droplet burning rates and validation report, FLEX test sheets and gas mixtures, FLEX-2 (PSI-68) test points and mixtures, CFI-G runs, Flame Design sooting limits, and the RAG index. Data processing is deterministic Python/pandas.
 Key finding
 
 None of the 276 FLEX tests combine 30% O2 or more with 70.5 kPa or less, the atmosphere expected in Moon bases (challenge text: 30% O2 or more, 10.2 psi or less). NASA also notes that PSI holds no partial-gravity combustion data yet. This claim is scoped to FLEX and to this catalog, not to all of NASA's data.
@@ -45,7 +46,7 @@ Routes
 Highlights
 Mission Fit (/rank): transparent heuristic ranking (atmosphere overlap 0.35 · safety pillar 0.30 · materials directness 0.20 · evidence depth 0.15) of investigations per crewed environment. Planned records are listed as roadmap lines, unranked.
 Coverage Map (/coverage): pressure × oxygen heatmap derived from the catalog, with ranked knowledge gaps (top gap: Moon-regime solid flammability at 30% O2 or more and 10.2 psi or less).
-Evidence Assistant (/assistant): a retrieval assistant using field-weighted keyword search (title ×3, keywords ×2, body ×1) over the catalog, with filters, five query modes, citations, evidence traces and honest "insufficient evidence" answers. It is not vector search or an LLM.
+Evidence Assistant (/assistant): a retrieval assistant. A deterministic TF-IDF index (scikit-learn, 338 chunks) built from the catalog, FLEX report, PSI records and documents is queried in the browser (src/lib/ragSearch.ts, score-identical to the Python reference scripts/rag_retrieve.py). Answers come only from retrieved chunks, each citation links to its NASA source, and queries scoring below the refusal threshold (0.112) get a clear "not enough data" answer with no citations. No LLM is used in the answer path.
 Prediction (/predict): exploratory distance-weighted nearest-neighbour estimator (k=6) over the 276 real FLEX tests. 5-fold cross-validation grouped by test date: R² 0.67 for extinction diameter (error 0.45 mm), 0.58 for burn time (3.6 s), 0.63 for burning rate (0.057 mm²/s). It refuses to extrapolate outside the tested envelope, and it does not predict extinction (the outcome label is weak, 67% Extinction).
 Living flame UI: the flame illustration and the interface react to the conditions you set and to how strong the evidence is.
 Flame visuals
@@ -80,4 +81,4 @@ Notes
 Figures in the UI are clearly labelled illustrative schematics, never claimed NASA imagery.
 Copy avoids safe/unsafe claims; scenario mode is retrieval-only.
 Flame visuals are schematic echoes of your settings, not predictions or simulations.
-AI tools used in building this project: Claude and ChatGPT.
+AI tools used in building this project: Claude, ChatGPT, OpenCode (GLM). Keep this list identical to the submission form's AI-use section.
