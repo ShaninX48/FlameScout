@@ -20,7 +20,17 @@ Data sources
 Investigation catalog: summaries of NASA PSI records and NASA technical reports (src/data/experiments.ts). Representative values are flagged (≈).
 Run-level data: FLEX Table IX, NASA/TP-2015-216046 (NTRS 20150023456), 276 tests (157 methanol, 119 heptane), in src/data/flexTests.ts. Pressure 70 to 309 kPa, O2 12 to 34 mol%.
 SAME (PSI-101) TEM soot particle sizes (datasets/): image-derived approximations from automated blob detection, not lab measurements.
-Other datasets in datasets/: FLEX droplet burning rates and validation report, FLEX test sheets and gas mixtures, FLEX-2 (PSI-68) test points and mixtures, CFI-G runs, Flame Design sooting limits, and the RAG index. Data processing is deterministic Python/pandas.
+FLEX droplet time series (PSI-69): all 276 tests parsed. 259 are comparable with Table IX; median difference in burning rate is about 3.9%, and 180 of 259 (70%) are within 7%. See datasets/flex_validation_report.md.
+FLEX test sheets: 505+ files, 240 unique tests; 63% match all 9 fields exactly, 90% match at least 8 of 9; 53 tests record a cool flame.
+FLEX gas mixtures: chamber gas (O2, CO2, N2, He, Xe) for 28 test points.
+FLEX-2 (PSI-68): 749 test points, 124 gas mixtures (including SF6, He and CO2 suppressant gases), 871 crew/downlink note blocks, chamber and radiometer summaries. Droplet diameter images (.zip archives) were not processed.
+CFI-G (PSI-159): test point configurations and 17 labelled runs from day 9 (13 sustained, 4 unsustained).
+Flame Design (PSI-10): SRD Table 1.1 (4 flames) and Table 1.2 (17 sooting-limit flames).
+PSI catalog and RAG: 21 investigations; 338 retrieval chunks.
+Catalog summaries only (no run-level data): SPICE, DAFT, BRE, CLD Flame, BASS-II.
+
+All data processing is deterministic Python/pandas; no LLM is in the data path. Image-derived and catalog values are approximations (≈).
+
 Key finding
 
 None of the 276 FLEX tests combine 30% O2 or more with 70.5 kPa or less, the atmosphere expected in Moon bases (challenge text: 30% O2 or more, 10.2 psi or less). NASA also notes that PSI holds no partial-gravity combustion data yet. This claim is scoped to FLEX and to this catalog, not to all of NASA's data.
