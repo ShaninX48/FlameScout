@@ -2,6 +2,10 @@ FlameScout — Flame in Freefall (NASA Space Apps 2026)
 
 Live demo: https://shaninx48.github.io/FlameScout/
 
+Demo video (240 s): https://www.youtube.com/watch?v=8db2P04rIfI
+
+Pitch video (30 s): https://www.youtube.com/watch?v=nvMl6VpEzuc
+
 FlameScout is a web dashboard that turns NASA's microgravity combustion research into cited, checkable fire-safety evidence for crewed missions (Artemis-era: spacecraft, Moon base, pressurized rover, spacesuit), and shows where evidence is missing.
 
 Team MindStormers, Dhaka: Omar Faruk Rakib (lead, full-stack), MD Tanveer Mahmood Shanin (full-stack), Sawda Akter (frontend, researcher), Joydev Datta (UI/UX), Antara Mazumder (backend), Md Junaeid Ali (AI engineer). Local mentor: SK Tajbir.
